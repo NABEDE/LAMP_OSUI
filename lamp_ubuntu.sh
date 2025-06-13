@@ -152,6 +152,9 @@ if sudo systemctl start apache2; then
     success_msg "Apache démarré avec succès."
 else
     error_exit "Échec du démarrage d'Apache. Vérifiez les logs Apache pour plus de détails. Le script s'arrête."
+    warn_msg "Affichage des logs Apache pour le débogage:"
+    journalctl -xeu apache2.service | tee -a "$LOG_FILE" # Affiche et log les logs Apache
+    error_exit "Échec du démarrage d'Apache. Vérifiez les logs Apache ci-dessus pour plus de détails. Le script s'arrête."
 fi
 
 # --- Étape 3: Installation et configuration de MySQL Server ---
@@ -161,18 +164,27 @@ if sudo apt install mysql-server -y; then
     success_msg "MySQL Server installé avec succès."
 else
     error_exit "Échec de l'installation de MySQL Server. Le script s'arrête."
+     warn_msg "Affichage des logs MySQL pour le débogage:"
+    journalctl -xeu mysql.service | tee -a "$LOG_FILE" # Affiche et log les logs MySQL
+    error_exit "Échec de l'installation de MySQL Server. Vérifiez les logs MySQL ci-dessus pour plus de détails. Le script s'arrête."
 fi
 
 if sudo systemctl enable mysql; then
     success_msg "MySQL activé pour démarrer au démarrage du système."
 else
     warn_msg "Échec de l'activation de MySQL au démarrage. Veuillez vérifier manuellement."
+     warn_msg "Échec de l'activation de MySQL au démarrage. Veuillez vérifier manuellement."
+    warn_msg "Affichage des logs MySQL pour le débogage:"
+    journalctl -xeu mysql.service | tee -a "$LOG_FILE" # Affiche et log les logs MySQL
 fi
 
 if sudo systemctl start mysql; then
     success_msg "MySQL démarré avec succès."
 else
     error_exit "Échec du démarrage de MySQL. Vérifiez les logs MySQL pour plus de détails. Le script s'arrête."
+     warn_msg "Affichage des logs MySQL pour le débogage:"
+    journalctl -xeu mysql.service | tee -a "$LOG_FILE" # Affiche et log les logs MySQL
+    error_exit "Échec du démarrage de MySQL. Vérifiez les logs MySQL ci-dessus pour plus de détails. Le script s'arrête."
 fi
 
 info_msg "---"
@@ -225,6 +237,10 @@ if systemctl is-active --quiet apache2 && systemctl is-active --quiet mysql; the
     success_msg "Apache et MySQL sont tous les deux en cours d'exécution."
 else
     warn_msg "Un ou plusieurs services LAMP ne sont pas actifs. Vérifiez manuellement (systemctl status apache2/mysql)."
+    warn_msg "Affichage des logs Apache pour le débogage:"
+    journalctl -xeu apache2.service | tee -a "$LOG_FILE" # Affiche et log les logs Apache
+    warn_msg "Affichage des logs MySQL pour le débogage:"
+    journalctl -xeu mysql.service | tee -a "$LOG_FILE" # Affiche et log les logs MySQL
 fi
 
 info_msg "---"
