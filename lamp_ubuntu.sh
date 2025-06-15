@@ -39,6 +39,7 @@ NC='\e[0m'        # Pas de couleur (Reset)
 # --- Fonctions d'affichage ---
 function error_exit {
     echo -e "${RED}ERREUR: $1${NC}" | tee -a "$LOG_FILE" >&2 # Affiche l'erreur en rouge gras et log
+    exit 1
 }
 
 function info_msg {
