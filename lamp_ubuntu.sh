@@ -39,7 +39,6 @@ NC='\e[0m'        # Pas de couleur (Reset)
 # --- Fonctions d'affichage ---
 function error_exit {
     echo -e "${RED}ERREUR: $1${NC}" | tee -a "$LOG_FILE" >&2 # Affiche l'erreur en rouge gras et log
-    exit 1
 }
 
 function info_msg {
@@ -101,6 +100,19 @@ info_msg "---"
 if [[ $EUID -ne 0 ]]; then
    error_exit "Ce script doit être exécuté en tant que root. Utilisez 'sudo ./install_lamp.sh'."
 fi
+
+#Une partie teste de connexion à internet
+info_msg "Vérification de la connexion internet..."
+if ! ping -c 1 google.com &> /dev/null; then
+    error_exit "Impossible de se connecter à Internet. Veuillez vérifier votre connexion et réessayer."
+else
+    info_msg "Connexion Internet OK"
+fi
+
+#Création de la fonction de teste du script
+function test_script(){
+    #vérification de la partie 
+}
 
 # Vérifier la distribution (prend en charge Debian/Ubuntu)
 if ! command -v apt &> /dev/null; then
