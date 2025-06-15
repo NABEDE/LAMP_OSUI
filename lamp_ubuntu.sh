@@ -109,11 +109,6 @@ else
     info_msg "Connexion Internet OK"
 fi
 
-#Création de la fonction de teste du script
-function test_script(){
-    #vérification de la partie 
-}
-
 # Vérifier la distribution (prend en charge Debian/Ubuntu)
 if ! command -v apt &> /dev/null; then
     error_exit "Ce script est conçu pour les systèmes basés sur Debian/Ubuntu (APT). Votre système ne semble pas l'être."
