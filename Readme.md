@@ -52,20 +52,20 @@ Ce script Bash est conçu pour automatiser l'installation et la configuration d'
 
 1.  **Téléchargez le script** :
     ```bash
-    git clone [https://github.com/votre_utilisateur/votre_depot.git](https://github.com/votre_utilisateur/votre_depot.git)
+    git clone [https://github.com/NABEDE/LAMP_UBUNTU.git](https://github.com/NABEDE/LAMP_UBUNTU.git)
     cd votre_depot
     # Ou téléchargez directement le fichier si vous n'avez pas de dépôt git
-    # wget [https://raw.githubusercontent.com/votre_utilisateur/votre_depot/main/install_lamp.sh](https://raw.githubusercontent.com/votre_utilisateur/votre_depot/main/install_lamp.sh)
+    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_UBUNTU/master/lamp_ubuntu.sh](https://raw.githubusercontent.com/NABEDE/LAMP_UBUNTU/master/lamp_ubuntu.sh)
     ```
 
 2.  **Rendez le script exécutable** :
     ```bash
-    chmod +x install_lamp.sh
+    chmod +x lamp_ubuntu.sh
     ```
 
 3.  **Exécutez le script** (en tant que `root` ou avec `sudo`) :
     ```bash
-    sudo ./install_lamp.sh
+    sudo ./lamp_ubuntu.sh
     ```
     Le script vous demandera une confirmation avant de commencer l'installation.
 
@@ -77,18 +77,18 @@ Vous pouvez utiliser les options suivantes lors de l'exécution du script :
 
 * `--help` : Affiche le message d'aide et les options disponibles.
     ```bash
-    sudo ./install_lamp.sh --help
+    sudo ./lamp_ubuntu.sh --help
     ```
 * `--no-confirm` : Lance l'installation sans demander de confirmation à l'utilisateur.
     ```bash
-    sudo ./install_lamp.sh --no-confirm
+    sudo ./lamp_ubuntu.sh --no-confirm
     ```
 
 ---
 
 ## 🔧 Configuration
 
-Vous pouvez personnaliser l'installation en modifiant les variables au début du script `install_lamp.sh` :
+Vous pouvez personnaliser l'installation en modifiant les variables au début du script `lamp_ubuntu.sh` :
 
 ```bash
 # --- Variables de configuration ---
