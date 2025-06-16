@@ -24,8 +24,8 @@ FROM ubuntu:latest
 RUN apt update && \
     DEBIAN_FRONTEND=noninteractive apt install -y \
     apache2 \
-    mysql-client \
-    php8.1 \
+    mysql-server \
+{{ edit_1 }}
     libapache2-mod-php8.1 \
     php8.1-mysql \
     git && \
