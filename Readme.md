@@ -52,10 +52,10 @@ Ce script Bash est conçu pour automatiser l'installation et la configuration d'
 
 1.  **Téléchargez le script** :
     ```bash
-    git clone [https://github.com/NABEDE/LAMP_UBUNTU.git](https://github.com/NABEDE/LAMP_UBUNTU.git)
+    git clone [https://github.com/NABEDE/LAMP_OSUI.git](https://github.com/NABEDE/LAMP_OSUI.git)
     cd votre_depot
     # Ou téléchargez directement le fichier si vous n'avez pas de dépôt git
-    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_UBUNTU/master/lamp_ubuntu.sh](https://raw.githubusercontent.com/NABEDE/LAMP_UBUNTU/master/lamp_ubuntu.sh)
+    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/lamp_ubuntu.sh](https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/lamp_ubuntu.sh)
     ```
 
 2.  **Rendez le script exécutable** :
