@@ -1,0 +1,31 @@
+# Utilise l'image Ubuntu la plus récente
+FROM ubuntu:latest
+
+# Empêche les invites interactives pendant l'installation des paquets
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Installe les outils nécessaires pour le script :
+#   - sudo : votre script l'utilise
+#   - wget, curl, net-tools, vim : outils courants, potentiellement utilisés ou utiles pour débogage
+#   - systemctl-runner : pour simuler les commandes systemctl dans Docker (nécessaire pour votre script)
+#   - rsyslog : souvent une dépendance des services, peut aider à éviter des erreurs
+RUN apt update -y && \
+    apt upgrade -y && \
+    apt install -y sudo wget curl vim net-tools rsyslog systemctl-runner && \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copie le script d'installation dans le conteneur
+COPY lamp_ubuntu.sh /tmp/lamp_ubuntu.sh
+
+# Rend le script exécutable
+RUN chmod +x /tmp/lamp_ubuntu.sh
+
+# Le script sera exécuté en tant que root, comme il l'exige.
+# Nous utilisons systemctl-runner pour simuler l'exécution du script comme un service
+# et pour gérer les commandes systemctl qui y sont appelées.
+# Le flag --no-confirm est ajouté pour automatiser l'installation sans interaction.
+CMD ["/usr/bin/systemctl-runner", "/tmp/lamp_ubuntu.sh", "--no-confirm"]
+
+# Expose le port 80 pour Apache (utile pour des vérifications post-installation)
+EXPOSE 80
