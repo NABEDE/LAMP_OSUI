@@ -20,7 +20,20 @@
 
 ## 💡 À Propos
 
-Ce script Bash est conçu pour automatiser l'installation et la configuration d'un environnement **LAMP** (Linux, Apache, MySQL, PHP) sur les systèmes d'exploitation basés sur Debian/Ubuntu. Il vise à simplifier le processus de mise en place d'un serveur de développement web local ou d'un serveur de production basique, en assurant une installation robuste avec des vérifications et des retours clairs.
+Ce script Bash est conçu pour automatiser l'installation et la configuration d'un environnement **LAMP** (Linux, Apache, MySQL, PHP) sur les systèmes d'exploitation basés sur Debian/Ubuntu/Centos. Il vise à simplifier le processus de mise en place d'un serveur de développement web local ou d'un serveur de production basique, en assurant une installation robuste avec des vérifications et des retours clairs.
+
+## 🎯 Prérequis
+
+### **Connaissance**
+Vous devez avoir des connaissances de base en Linux, en gestion de serveurs et en administration système. Vous devez être capable de naviguer dans un terminal et de comprendre les commandes de base du langage bash.
+
+### **Système d'exploitation**
+Le script est conçu pour fonctionner sur les distributions Debian/Ubuntu/Centos. Il n'est pas destiné à d'autres systèmes d'exploitation que des systèmes Linux basés sur Debian/Ubuntu/Centos.
+De ce fait, assurez vous d'avoir installer votre système d'exploitation Linux (Debian/Ubuntu/Centos) avant de lancer le script.
+
+### **Droits d'administration**
+Pour installer et configurer les composants du LAMP, le script nécessite des droits d'administration. Assurez-vous d'avoir les droits d'administration (sudo) ou d'exécuter le script en tant qu'utilisateur root.
+
 
 ---
 
@@ -55,17 +68,41 @@ Ce script Bash est conçu pour automatiser l'installation et la configuration d'
     git clone [https://github.com/NABEDE/LAMP_OSUI.git](https://github.com/NABEDE/LAMP_OSUI.git)
     cd votre_depot
     # Ou téléchargez directement le fichier si vous n'avez pas de dépôt git
-    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/lamp_ubuntu.sh](https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/lamp_ubuntu.sh)
+    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/apps/lamp_ubuntu.sh](https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/apps/lamp_ubuntu.sh)
+    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/apps/lamp_debian.sh](https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/apps/lamp_debian.sh)
+    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/apps/lamp_centos.sh](https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/apps/lamp_centos.sh)
     ```
 
 2.  **Rendez le script exécutable** :
     ```bash
-    chmod +x lamp_ubuntu.sh
+    #Choisissez suivant votre OS
+    chmod +x apps/lamp_ubuntu.sh
+    #ou
+    chmod +x apps/lamp_debian.sh
+    #ou
+    chmod +x apps/lamp_centos.sh
+    ```
+
+2.  **Rendez le script exécutable** :
+    ```bash
+    #Choisissez suivant votre OS
+    chmod +x apps/lamp_ubuntu.sh
+    #ou
+    chmod +x apps/lamp_debian.sh
+    #ou
+    chmod +x apps/lamp_centos.sh
     ```
 
 3.  **Exécutez le script** (en tant que `root` ou avec `sudo`) :
     ```bash
+    #Allez dans le dossier apps
+    cd apps
+    #Choisissez suivant votre OS
     sudo ./lamp_ubuntu.sh
+    #ou
+    sudo./lamp_debian.sh
+    #ou
+    sudo./lamp_centos.sh
     ```
     Le script vous demandera une confirmation avant de commencer l'installation.
 
@@ -77,11 +114,17 @@ Vous pouvez utiliser les options suivantes lors de l'exécution du script :
 
 * `--help` : Affiche le message d'aide et les options disponibles.
     ```bash
+    #Choisissez votre OS
     sudo ./lamp_ubuntu.sh --help
+    sudo ./lamp_debian.sh --help
+    sudo ./lamp_centos.sh --help
     ```
 * `--no-confirm` : Lance l'installation sans demander de confirmation à l'utilisateur.
     ```bash
+    #Choisissez votre OS
     sudo ./lamp_ubuntu.sh --no-confirm
+    sudo ./lamp_debian.sh --no-confirm
+    sudo ./lamp_centos.sh --no-confirm
     ```
 
 ---
