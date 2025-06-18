@@ -5,8 +5,8 @@
 ## Table des Matières
 
 - [À Propos](#-à-propos)
-- [Fonctionnalités](#-fonctionnalités)
 - [Prérequis](#-prérequis)
+- [Fonctionnalités](#-fonctionnalités)
 - [Utilisation](#-utilisation)
 - [Options du Script](#-options-du-script)
 - [Configuration](#-configuration)
@@ -40,7 +40,6 @@ Pour installer et configurer les composants du LAMP, le script nécessite des dr
 * Un système d'exploitation basé sur Debian ou Ubuntu (par exemple, Ubuntu 20.04, 22.04, Debian 11, 12).
 * Un accès `sudo` (le script doit être exécuté en tant que `root` ou avec `sudo`).
 * Une connexion Internet active.
-
 
 ---
 
