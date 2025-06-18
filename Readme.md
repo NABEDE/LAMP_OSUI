@@ -22,6 +22,8 @@
 
 Ce script Bash est conçu pour automatiser l'installation et la configuration d'un environnement **LAMP** (Linux, Apache, MySQL, PHP) sur les systèmes d'exploitation basés sur Debian/Ubuntu/Centos. Il vise à simplifier le processus de mise en place d'un serveur de développement web local ou d'un serveur de production basique, en assurant une installation robuste avec des vérifications et des retours clairs.
 
+---
+
 ## 🎯 Prérequis
 
 ### **Connaissance**
@@ -33,6 +35,11 @@ De ce fait, assurez vous d'avoir installer votre système d'exploitation Linux (
 
 ### **Droits d'administration**
 Pour installer et configurer les composants du LAMP, le script nécessite des droits d'administration. Assurez-vous d'avoir les droits d'administration (sudo) ou d'exécuter le script en tant qu'utilisateur root.
+
+### **Informations supplémentaires importantes**
+* Un système d'exploitation basé sur Debian ou Ubuntu (par exemple, Ubuntu 20.04, 22.04, Debian 11, 12).
+* Un accès `sudo` (le script doit être exécuté en tant que `root` ou avec `sudo`).
+* Une connexion Internet active.
 
 
 ---
@@ -50,14 +57,6 @@ Pour installer et configurer les composants du LAMP, le script nécessite des dr
 * **Fichier `info.php`** : Crée un fichier de test pour vérifier la configuration PHP.
 * **Nettoyage Automatique** : Effectue un `apt autoremove` et `apt clean` pour supprimer les paquets inutiles et libérer de l'espace.
 * **Option d'Aide** : Fournit une option `--help` pour afficher les instructions d'utilisation.
-
----
-
-## 📋 Prérequis
-
-* Un système d'exploitation basé sur Debian ou Ubuntu (par exemple, Ubuntu 20.04, 22.04, Debian 11, 12).
-* Un accès `sudo` (le script doit être exécuté en tant que `root` ou avec `sudo`).
-* Une connexion Internet active.
 
 ---
 
