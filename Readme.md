@@ -63,12 +63,12 @@ Pour installer et configurer les composants du LAMP, le script nécessite des dr
 
 1.  **Téléchargez le script** :
     ```bash
-    git clone [https://github.com/NABEDE/LAMP_OSUI.git](https://github.com/NABEDE/LAMP_OSUI.git)
-    cd LAMP_OSUI
+    git clone [https://github.com/NABEDE/LAMP_OSUI-1.0.git](https://github.com/NABEDE/LAMP_OSUI-1.0.git)
+    cd LAMP_OSUI-1.0
     # Ou téléchargez directement le fichier si vous n'avez pas de dépôt git
-    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/apps/lamp_ubuntu.sh](https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/apps/lamp_ubuntu.sh)
-    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/apps/lamp_debian.sh](https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/apps/lamp_debian.sh)
-    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/apps/lamp_centos.sh](https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/apps/lamp_centos.sh)
+    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/lamp_ubuntu.sh](https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/lamp_ubuntu.sh)
+    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/lamp_debian.sh](https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/lamp_debian.sh)
+    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/lamp_centos.sh](https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/lamp_centos.sh)
     ```
 
 2.  **Rendez le script exécutable** :
