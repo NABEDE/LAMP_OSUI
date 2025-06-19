@@ -6,7 +6,7 @@
 # Sur une machine Debian.
 #
 # Auteur: Jérôme N. | Ingénieur Système Réseau | Développeur Microservices Linux & Docker.
-# Date: 12 Juin 2025
+# Date: 19 Juin 2025
 # ==============================================================================
 
 # --- Variables de configuration ---
