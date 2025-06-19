@@ -85,10 +85,15 @@ Pour installer et configurer les composants du LAMP, le script nécessite des dr
     ```bash
     #Choisissez suivant votre OS
     chmod +x apps/lamp_ubuntu.sh
+
     #ou
     chmod +x apps/lamp_debian.sh
+
     #ou
     chmod +x apps/lamp_centos.sh
+
+    #Pour ceux qui ont télécharger seulement le script lamp_ubuntu.sh ou lamp_debian.sh ou lamp_centos.sh
+    chmod +x lamp_ubuntu.sh
     ```
 
 3.  **Exécutez le script** (en tant que `root` ou avec `sudo`) :
