@@ -3,9 +3,9 @@
 # ==============================================================================
 # Script d'Installation LAMP Perfectionné
 # Ce script installe et configure un environnement LAMP (Linux, Apache, MySQL, PHP)
-# sur les systèmes basés sur Debian/Ubuntu.
+# Sur les systèmes basés sur Debian/Ubuntu.
 #
-# Auteur: Votre Nom / Modifié par Gemini
+# Auteur: Jérôme N. | Ingénieur Système Réseau | Développeur Microservices Linux & Docker.
 # Date: 12 Juin 2025
 # ==============================================================================
 

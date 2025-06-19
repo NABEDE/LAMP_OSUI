@@ -5,7 +5,7 @@
 # Ce script installe et configure un environnement LAMP (Linux, Apache, MySQL, PHP)
 # sur les systèmes basés sur CentOS.
 #
-# Auteur: Votre Nom / Modifié par Gemini
+# Auteur: Jérôme N. | Ingénieur Système Réseau | Développeur Microservices Linux & Docker.
 # Date: 12 Juin 2025
 # ==============================================================================
 
