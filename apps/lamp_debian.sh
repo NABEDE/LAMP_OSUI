@@ -58,7 +58,9 @@ function warn_msg {
 
 # --- Fonction d'aide ---
 function show_help {
-    echo -e "${BLUE}Utilisation: sudo ./install_lamp.sh [options]${NC}"
+    echp -e "${BLUE}Naviguez vers le dossier apps : cd apps${NC}"
+    echo -e "${BLUE}Rendre exécutable le fichier lamp_debian : chmod +x lamp_debian.sh${NC}"
+    echo -e "${BLUE}Utilisation: sudo ./lamp_debian.sh${NC}"
     echo -e "${BLUE}Ce script installe un environnement LAMP (Linux, Apache, MySQL, PHP).${NC}"
     echo -e "${BLUE}Options disponibles:${NC}"
     echo -e "  ${GREEN}--help${NC}    Affiche ce message d'aide."

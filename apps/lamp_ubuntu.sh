@@ -50,13 +50,17 @@ function success_msg {
     echo -e "${GREEN}$1${NC}" | tee -a "$LOG_FILE" # Affiche le succès en vert gras et log
 }
 
+
+
 function warn_msg {
     echo -e "${YELLOW}AVERTISSEMENT: $1${NC}" | tee -a "$LOG_FILE" # Affiche l'avertissement en jaune gras et log
 }
 
 # --- Fonction d'aide ---
 function show_help {
-    echo -e "${BLUE}Utilisation: sudo ./install_lamp.sh [options]${NC}"
+    echo -e "${BLUE}Naviguez vers le dossier apps : cd apps${NC}"
+    echo -e "${BLUE}Rendre le fichier lamp_ubuntu exécutable : chmod +x lamp_ubuntu${NC}"
+    echo -e "${BLUE}Utilisation : sudo ./lamp_ubuntu.sh [options]${NC}"
     echo -e "${BLUE}Ce script installe un environnement LAMP (Linux, Apache, MySQL, PHP).${NC}"
     echo -e "${BLUE}Options disponibles:${NC}"
     echo -e "  ${GREEN}--help${NC}    Affiche ce message d'aide."
