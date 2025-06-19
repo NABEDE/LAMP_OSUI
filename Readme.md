@@ -112,16 +112,22 @@ Vous pouvez utiliser les options suivantes lors de l'exécution du script :
 
 * `--help` : Affiche le message d'aide et les options disponibles.
     ```bash
+    cd apps
     #Choisissez votre OS
     sudo ./lamp_ubuntu.sh --help
+    #Ou
     sudo ./lamp_debian.sh --help
+    #Ou
     sudo ./lamp_centos.sh --help
     ```
 * `--no-confirm` : Lance l'installation sans demander de confirmation à l'utilisateur.
     ```bash
+    cd apps
     #Choisissez votre OS
     sudo ./lamp_ubuntu.sh --no-confirm
+    #Ou
     sudo ./lamp_debian.sh --no-confirm
+    #Ou
     sudo ./lamp_centos.sh --no-confirm
     ```
 
