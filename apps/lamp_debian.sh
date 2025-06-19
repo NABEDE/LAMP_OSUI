@@ -52,6 +52,10 @@ function success_msg {
     echo -e "${GREEN}$1${NC}" | tee -a "$LOG_FILE" # Affiche le succès en vert gras et log
 }
 
+function warn_msg {
+    echo -e "${YELLOW}$1${NC}" | tee -a "$LOG_FILE" # Affiche une alerte en jaune gras et log
+}
+
 # --- Fonction d'aide ---
 function show_help {
     echo -e "${BLUE}Utilisation: sudo ./install_lamp.sh [options]${NC}"
