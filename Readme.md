@@ -103,9 +103,9 @@ Pour installer et configurer les composants du LAMP, le script nécessite des dr
     #Choisissez suivant votre OS
     sudo ./ubuntu/install.sh
     #ou
-    sudo./debian/install.sh
+    sudo ./debian/install.sh
     #ou
-    sudo./centos/install.sh
+    sudo ./centos/install.sh
     ```
     Le script vous demandera une confirmation avant de commencer l'installation.
 

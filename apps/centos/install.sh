@@ -1,4 +1,5 @@
 #!/bin/bash
+source ../logo.sh
 
 # ==============================================================================
 # Script d'Installation LAMP Perfectionné pour CentOS
