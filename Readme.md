@@ -66,46 +66,46 @@ Pour installer et configurer les composants du LAMP, le script nécessite des dr
     git clone [https://github.com/NABEDE/LAMP_OSUI-1.0.git](https://github.com/NABEDE/LAMP_OSUI-1.0.git)
     cd LAMP_OSUI-1.0
     # Ou téléchargez directement le fichier si vous n'avez pas de dépôt git
-    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/lamp_ubuntu.sh](https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/lamp_ubuntu.sh)
-    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/lamp_debian.sh](https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/lamp_debian.sh)
-    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/lamp_centos.sh](https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/lamp_centos.sh)
+    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/ubuntu/install.sh](https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/ubuntu/install.sh)
+    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/debian/install.sh](https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/debian/install.sh)
+    # wget [https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/centos/install.sh](https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/centos/install.sh)
     ```
 
 2.  **Rendez le script exécutable** :
     ```bash
     #Choisissez suivant votre OS
-    chmod +x apps/lamp_ubuntu.sh
+    chmod +x apps/ubuntu/install.sh
     #ou
-    chmod +x apps/lamp_debian.sh
+    chmod +x apps/debian/install.sh
     #ou
-    chmod +x apps/lamp_centos.sh
+    chmod +x apps/centos/install.sh
     ```
 
 2.  **Rendez le script exécutable** :
     ```bash
     #Choisissez suivant votre OS
-    chmod +x apps/lamp_ubuntu.sh
+    chmod +x apps/ubuntu/install.sh
 
     #ou
-    chmod +x apps/lamp_debian.sh
+    chmod +x apps/debian/install.sh
 
     #ou
-    chmod +x apps/lamp_centos.sh
+    chmod +x apps/centos/install.sh
 
-    #Pour ceux qui ont télécharger seulement le script lamp_ubuntu.sh ou lamp_debian.sh ou lamp_centos.sh
-    chmod +x lamp_ubuntu.sh
+    #Pour ceux qui ont télécharger seulement le script install.sh pour Debian ou Centos ou Ubuntu
+    chmod +x install.sh
     ```
 
 3.  **Exécutez le script** (en tant que `root` ou avec `sudo`) :
     ```bash
     #Allez dans le dossier apps
-    cd apps
+    cd apps/
     #Choisissez suivant votre OS
-    sudo ./lamp_ubuntu.sh
+    sudo ./ubuntu/install.sh
     #ou
-    sudo./lamp_debian.sh
+    sudo./debian/install.sh
     #ou
-    sudo./lamp_centos.sh
+    sudo./centos/install.sh
     ```
     Le script vous demandera une confirmation avant de commencer l'installation.
 
@@ -119,21 +119,21 @@ Vous pouvez utiliser les options suivantes lors de l'exécution du script :
     ```bash
     cd apps
     #Choisissez votre OS
-    sudo ./lamp_ubuntu.sh --help
+    sudo ./ubuntu/install.sh --help
     #Ou
-    sudo ./lamp_debian.sh --help
+    sudo ./debian/install.sh --help
     #Ou
-    sudo ./lamp_centos.sh --help
+    sudo ./centos/install.sh --help
     ```
 * `--no-confirm` : Lance l'installation sans demander de confirmation à l'utilisateur.
     ```bash
     cd apps
     #Choisissez votre OS
-    sudo ./lamp_ubuntu.sh --no-confirm
+    sudo ./ubuntu/install.sh --no-confirm
     #Ou
-    sudo ./lamp_debian.sh --no-confirm
+    sudo ./debian/install.sh --no-confirm
     #Ou
-    sudo ./lamp_centos.sh --no-confirm
+    sudo ./centos/install.sh --no-confirm
     ```
 
 ---
