@@ -100,6 +100,16 @@ info_msg "--- Script d'Installation LAMP Perfectionné ---"
 info_msg "La sortie de ce script sera également enregistrée dans: ${LOG_FILE}"
 info_msg "---"
 
+    echo "       *       * *********************************"
+    echo "      ***    *  **********************************"
+    echo "     ***** *   ***********************************"
+    echo "    *******    ************************************"
+    echo "    ***** * LAMP_OSUI-1.0  ************************"
+    echo "    ******* *   ***********************************"
+    echo "     *****   *  **********************************"
+    echo "      ***    *  *********************************"
+    echo "       *       ************************************"
+
 # --- Pré-vérifications ---
 # Vérifier si l'utilisateur est root
 if [[ $EUID -ne 0 ]]; then
