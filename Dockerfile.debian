@@ -16,13 +16,13 @@ RUN apt update -y && \
     rm -rf /var/lib/apt/lists/*
 
 # Copie le script d'installation dans le conteneur
-COPY lamp_debian.sh /tmp/lamp_debian.sh
+COPY debian/install.sh /tmp/install.sh
 
 # Rend le script exécutable
-RUN chmod +x /tmp/lamp_debian.sh
+RUN chmod +x /tmp/install.sh
 
 # Exécute le script d'installation avec systemctl-runner et l'option --no-confirm
-CMD ["/usr/bin/systemctl-runner", "/tmp/install_lamp.sh", "--no-confirm"]
+CMD ["/usr/bin/systemctl-runner", "/tmp/install.sh", "--no-confirm"]
 
 # Expose le port 80 pour Apache
 EXPOSE 80

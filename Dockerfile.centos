@@ -22,14 +22,14 @@ RUN chmod +x /usr/bin/systemctl-runner
 
 
 # Copie le script d'installation dans le conteneur
-COPY lamp_centos.sh /tmp/lamp_centos.sh
+COPY centos/install.sh /tmp/install.sh
 
 # Rend le script exécutable
-RUN chmod +x /tmp/lamp_centos.sh
+RUN chmod +x /tmp/install.sh
 
 # Le script sera exécuté en tant que root.
 # Le flag --no-confirm est ajouté pour automatiser l'installation sans interaction.
-CMD ["/usr/bin/systemctl-runner", "/tmp/lamp_centos.sh", "--no-confirm"]
+CMD ["/usr/bin/systemctl-runner", "/tmp/install.sh", "--no-confirm"]
 
 # Expose le port 80 pour Apache
 EXPOSE 80

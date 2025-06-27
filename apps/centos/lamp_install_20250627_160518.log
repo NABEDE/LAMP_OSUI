@@ -1,0 +1,13 @@
+\e[1;34m
+  \e[1;33m**** **** **** ****\e[0m
+ \e[1;33m* \e[1;34mL\e[1;33m * \e[1;34mA\e[1;33m * \e[1;34mM\e[1;33m * \e[1;34mP\e[1;33m *\e[0m
+\e[1;33m* * * * * * * *\e[0m
+\e[1;33m* \e[1;34m** \e[1;33m** * \e[1;31m****\e[0m
+ \e[1;33m* * * * * * *\e[0m
+  \e[1;33m* * * * * *\e[0m
+   \e[1;33m**** **** **** ****\e[0m
+\e[0m
+\e[1;34m--- Script d'Installation LAMP Perfectionné pour CentOS ---\e[0m
+\e[1;34mLa sortie de ce script sera également enregistrée dans: lamp_install_20250627_160518.log\e[0m
+\e[1;34m---\e[0m
+\e[1;31mERREUR: Ce script doit être exécuté en tant que root. Utilisez 'sudo ./install_lamp_centos.sh'.\e[0m
