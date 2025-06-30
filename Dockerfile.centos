@@ -1,35 +1,16 @@
-# Utilise l'image CentOS la plus récente
 FROM centos:latest
 
-# Installe les outils nécessaires
-#   - sudo : votre script l'utilise
-#   - wget, curl, net-tools, vim : outils courants
-#   - systemctl-runner : pour simuler les commandes systemctl dans Docker
-#   - initscripts : contient des outils comme service, peut être utile
-#   - rsyslog : pour la journalisation
 RUN yum update -y && \
     yum install -y sudo wget curl vim net-tools initscripts rsyslog && \
     yum clean all && \
     rm -rf /var/cache/yum/*
 
-# Installe systemctl-runner, qui n'est pas dans les dépôts par défaut de CentOS.
-# Nous allons le télécharger et l'installer manuellement.
-# Vous pouvez trouver le script systemctl-runner sur GitHub ou le créer vous-même.
-# Pour cet exemple, je vais le télécharger depuis un emplacement supposé ou un dépôt connu.
-# Si vous avez votre propre version, ajustez le COPY.
 COPY systemctl-runner /usr/bin/systemctl-runner
 RUN chmod +x /usr/bin/systemctl-runner
 
-
-# Copie le script d'installation dans le conteneur
 COPY centos/install.sh /tmp/install.sh
-
-# Rend le script exécutable
 RUN chmod +x /tmp/install.sh
 
-# Le script sera exécuté en tant que root.
-# Le flag --no-confirm est ajouté pour automatiser l'installation sans interaction.
 CMD ["/usr/bin/systemctl-runner", "/tmp/install.sh", "--no-confirm"]
 
-# Expose le port 80 pour Apache
 EXPOSE 80

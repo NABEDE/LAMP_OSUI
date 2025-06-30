@@ -1,28 +1,13 @@
-# Utilise l'image Debian la plus récente
-FROM debian:latest
+FROM debian:bullseye
 
-# Empêche les invites interactives pendant l'installation des paquets
-ENV DEBIAN_FRONTEND=noninteractive
-
-# Installe les outils nécessaires pour le script :
-#   - sudo : votre script l'utilise
-#   - wget, curl, net-tools, vim : outils courants, potentiellement utilisés ou utiles pour débogage
-#   - systemctl-runner : pour simuler les commandes systemctl dans Docker (nécessaire pour votre script)
-#   - rsyslog : souvent une dépendance des services, peut aider à éviter des erreurs
-RUN apt update -y && \
-    apt upgrade -y && \
-    apt install -y sudo wget curl vim net-tools rsyslog systemctl-runner && \
-    apt clean && \
+RUN apt-get update && \
+    apt-get install -y sudo wget curl vim net-tools rsyslog && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Copie le script d'installation dans le conteneur
 COPY debian/install.sh /tmp/install.sh
-
-# Rend le script exécutable
 RUN chmod +x /tmp/install.sh
 
-# Exécute le script d'installation avec systemctl-runner et l'option --no-confirm
-CMD ["/usr/bin/systemctl-runner", "/tmp/install.sh", "--no-confirm"]
+CMD ["/bin/bash", "/tmp/install.sh", "--no-confirm"]
 
-# Expose le port 80 pour Apache
 EXPOSE 80
