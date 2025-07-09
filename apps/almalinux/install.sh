@@ -2,9 +2,9 @@
 source ../logo.sh
 
 # ==============================================================================
-# Script d'Installation LAMP Perfectionné pour CentOS
+# Script d'Installation LAMP Perfectionné pour Almalinux
 # Ce script installe et configure un environnement LAMP (Linux, Apache, MySQL, PHP)
-# sur les systèmes basés sur CentOS.
+# sur les systèmes basés sur Almalinux.
 #
 # Auteur: Jérôme N. | Ingénieur Système Réseau | Développeur Microservices Linux & Docker.
 # Date: 19 Juin 2025
@@ -13,7 +13,7 @@ source ../logo.sh
 # --- Variables de configuration ---
 # Vous pouvez modifier ces variables si nécessaire
 PHP_VERSION="8.1" # Exemple: "7.4", "8.1", etc. (doit être disponible dans les dépôts)
-# Note: Pour PHP 8.x sur CentOS, vous devrez probablement activer les dépôts EPEL et Remi.
+# Note: Pour PHP 8.x sur Almalinux, vous devrez probablement activer les dépôts EPEL et Remi.
 # Le script tentera de le faire automatiquement.
 PHP_MODULES=(
     "php"
@@ -59,9 +59,9 @@ function warn_msg {
 # --- Fonction d'aide ---
 function show_help {
     echp -e "${BLUE}Naviguez vers le dossier apps : cd apps${NC}"
-    echo -e "${BLUE}Rendre exécutable le fichier lamp_centos : chmod +x lamp_centos.sh${NC}"
-    echo -e "${BLUE}Utilisation: sudo ./lamp_centos.sh${NC}"
-    echo -e "${BLUE}Ce script installe un environnement LAMP (Linux, Apache, MySQL, PHP) sur CentOS.${NC}"
+    echo -e "${BLUE}Rendre exécutable le fichier install : chmod +x install.sh${NC}"
+    echo -e "${BLUE}Utilisation: sudo ./install.sh${NC}"
+    echo -e "${BLUE}Ce script installe un environnement LAMP (Linux, Apache, MySQL, PHP) sur almalinux.${NC}"
     echo -e "${BLUE}Options disponibles:${NC}"
     echo -e "  ${GREEN}--help${NC}    Affiche ce message d'aide."
     echo -e "  ${GREEN}--no-confirm${NC}  Exécute le script sans demander de confirmation."
@@ -96,14 +96,14 @@ ${YELLOW}* ${BLUE}** ${YELLOW}** * ${RED}****${NC}
   ${YELLOW}* * * * * *${NC}
    ${YELLOW}**** **** **** ****${NC}
 "
-info_msg "--- Script d'Installation LAMP Perfectionné pour CentOS ---"
+info_msg "--- Script d'Installation LAMP Perfectionné pour Almalinux ---"
 info_msg "La sortie de ce script sera également enregistrée dans: ${LOG_FILE}"
 info_msg "---"
 
 # --- Pré-vérifications ---
 # Vérifier si l'utilisateur est root
 if [[ $EUID -ne 0 ]]; then
-   error_exit "Ce script doit être exécuté en tant que root. Utilisez 'sudo ./install_lamp_centos.sh'."
+   error_exit "Ce script doit être exécuté en tant que root. Utilisez 'sudo ./install.sh'."
 fi
 
 # Détecter le gestionnaire de paquets (dnf ou yum)
@@ -114,7 +114,7 @@ elif command -v yum &> /dev/null; then
     PKG_MANAGER="yum"
     info_msg "Utilisation de YUM comme gestionnaire de paquets."
 else
-    error_exit "Aucun gestionnaire de paquets (dnf ou yum) trouvé. Ce script est conçu pour CentOS/RHEL."
+    error_exit "Aucun gestionnaire de paquets (dnf ou yum) trouvé. Ce script est conçu pour Almalinux/RHEL."
 fi
 
 # Test de connexion à internet
@@ -125,14 +125,14 @@ else
     info_msg "Connexion Internet OK"
 fi
 
-# Vérifier la distribution (prend en charge CentOS/RHEL)
-if ! grep -q "CentOS" /etc/redhat-release && ! grep -q "Red Hat Enterprise Linux" /etc/redhat-release; then
-    error_exit "Ce script est conçu pour les systèmes basés sur CentOS/RHEL. Votre système ne semble pas l'être."
+# Vérifier la distribution (prend en charge Almalinux/RHEL)
+if ! grep -q "Almalinux" /etc/redhat-release && ! grep -q "Red Hat Enterprise Linux" /etc/redhat-release; then
+    error_exit "Ce script est conçu pour les systèmes basés sur Almalinux/RHEL. Votre système ne semble pas l'être."
 fi
 
 # Demander confirmation avant de commencer si --no-confirm n'est pas utilisé
 if ! $NO_CONFIRM; then
-    read -p "$(info_msg "Voulez-vous démarrer l'installation LAMP sur CentOS ? (O/n) ")" confirm
+    read -p "$(info_msg "Voulez-vous démarrer l'installation LAMP sur Almalinux ? (O/n) ")" confirm
     if [[ "$confirm" =~ ^[Nn]$ ]]; then
         info_msg "Installation annulée par l'utilisateur."
         exit 0
@@ -192,7 +192,7 @@ fi
 
 # --- Étape 3: Installation et configuration de MySQL Server (MariaDB) ---
 info_msg "---"
-info_msg "Installation et configuration de MySQL Server (MariaDB par défaut sur CentOS)..."
+info_msg "Installation et configuration de MySQL Server (MariaDB par défaut sur Almalinux)..."
 if sudo $PKG_MANAGER -y install mariadb-server mariadb; then
     success_msg "MariaDB Server installé avec succès."
 else
@@ -319,7 +319,7 @@ else
 fi
 
 info_msg "---"
-success_msg "Installation LAMP sur CentOS terminée avec succès !"
+success_msg "Installation LAMP sur Almalinux terminée avec succès !"
 warn_msg "Pour des raisons de sécurité, n'oubliez pas de supprimer le fichier info.php après utilisation avec la commande:"
 warn_msg "sudo rm $INFO_FILE"
 info_msg "---"
