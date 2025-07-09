@@ -30,6 +30,19 @@ show_help() {
     exit 0
 }
 
+# 📦 Détection de la version de Debian
+DEBIAN_VERSION=$(grep VERSION_ID /etc/os-release | cut -d '"' -f 2)
+info_msg "🖥️  Version de Debian détectée : $DEBIAN_VERSION"
+
+# Fonction pour installer mysql depuis le dépôt officiel Oracle
+install_mysql_official_repo() {
+    info_msg "🌐 Ajout du dépôt officiel MySQL (Oracle)..."
+    wget -q https://dev.mysql.com/get/mysql-apt-config_0.8.29-1_all.deb || error_exit "❌ Échec du téléchargement du dépôt MySQL."
+    DEBIAN_FRONTEND=noninteractive dpkg -i mysql-apt-config_0.8.29-1_all.deb
+    apt update || error_exit "❌ Échec de mise à jour après ajout du dépôt MySQL."
+    apt install -y mysql-server && return 0 || return 1
+}
+
 
 # --- 🧠 Traitement des arguments ---
 NO_CONFIRM=false
@@ -75,7 +88,7 @@ else
 fi
 
 
-# 💰 Installation de MySQL ou MariaDB
+# 💰 Installation de MySQL ou MariaDB ( Travail sur ceci )
 MYSQL_PKG="mysql-server"
 info_msg "💰 Tentative d'installation de $MYSQL_PKG..."
 if ! apt install -y "$MYSQL_PKG"; then
@@ -89,6 +102,39 @@ if ! apt install -y "$MYSQL_PKG"; then
 else
     success_msg "✅ $MYSQL_PKG installé avec succès."
 fi
+
+# 💰 Tentative d'installation native de MySQL
+MYSQL_PKG="mysql-server"
+info_msg "💰 Tentative d'installation de $MYSQL_PKG depuis les dépôts Debian..."
+
+if ! apt install -y "$MYSQL_PKG"; then
+    warn_msg "❌ $MYSQL_PKG indisponible dans les dépôts natifs."
+
+    # Cas Debian 11 et plus : proposer dépôt officiel
+    if [[ "$DEBIAN_VERSION" -ge 11 ]]; then
+        info_msg "🔁 Debian $DEBIAN_VERSION : Ajout du dépôt Oracle recommandé."
+        if install_mysql_official_repo; then
+            success_msg "✅ MySQL installé avec succès via le dépôt officiel."
+            exit 0
+        else
+            warn_msg "❌ Installation MySQL échouée via le dépôt Oracle."
+        fi
+    else
+        warn_msg "ℹ️ Debian $DEBIAN_VERSION : MySQL non pris en charge directement. Tentative avec MariaDB..."
+    fi
+
+    # 🔄 Tentative avec MariaDB (alternative 100% compatible)
+    MYSQL_PKG="mariadb-server"
+    if ! apt install -y "$MYSQL_PKG"; then
+        error_exit "🚫 Échec d'installation de MySQL et MariaDB. Vérifiez vos sources APT."
+    else
+        success_msg "✅ $MYSQL_PKG installé avec succès comme alternative."
+    fi
+else
+    success_msg "✅ $MYSQL_PKG installé avec succès."
+fi
+
+# ( La partie sur laquelle il faut travailler )
 
 # 🔄 Détection dynamique du service MySQL/MariaDB
 detect_mysql_service() {

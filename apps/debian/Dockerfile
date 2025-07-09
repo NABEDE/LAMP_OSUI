@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM debian:buster
 
 # Installer les utilitaires nécessaires et systemd
 ENV DEBIAN_FRONTEND=noninteractive
