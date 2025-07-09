@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:trixie-backports
 
 # Installer les utilitaires nécessaires et systemd
 ENV DEBIAN_FRONTEND=noninteractive

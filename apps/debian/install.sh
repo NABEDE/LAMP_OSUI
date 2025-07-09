@@ -154,8 +154,11 @@ fi
 
 # 🚀 Activation + Démarrage du service
 info_msg "⚙️ Activation et démarrage du service : $MYSQL_SERVICE"
-systemctl enable "$MYSQL_SERVICE" || warn_msg "⚠️ Impossible d'activer $MYSQL_SERVICE au démarrage."
-systemctl start "$MYSQL_SERVICE" || error_exit "🚫 Impossible de démarrer le service $MYSQL_SERVICE."
+#systemctl enable "$MYSQL_SERVICE" || warn_msg "⚠️ Impossible d'activer $MYSQL_SERVICE au démarrage."
+#systemctl start "$MYSQL_SERVICE" || error_exit "🚫 Impossible de démarrer le service $MYSQL_SERVICE."
+service enable "$MYSQL_SERVICE" || warn_msg "⚠️ Impossible d'activer $MYSQL_SERVICE au démarrage."
+service "$MYSQL_SERVICE" || error_exit "🚫 Impossible de démarrer le service $MYSQL_SERVICE."
+
 
 # 🔐 Sécurisation
 info_msg "🔐 Sécurisation de l'installation de $MYSQL_SERVICE..."
