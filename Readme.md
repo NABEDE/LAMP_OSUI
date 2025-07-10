@@ -1,4 +1,4 @@
-# 🚀 Script d'Installation LAMP Perfectionné
+# 🚀 LAMP_OSUI-1.0
 
 ---
 
