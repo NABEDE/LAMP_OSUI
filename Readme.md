@@ -20,7 +20,7 @@
 
 ## 💡 À Propos
 
-Ce script Bash est conçu pour automatiser l'installation et la configuration d'un environnement **LAMP** (Linux, Apache, MySQL, PHP) sur les systèmes d'exploitation basés sur Debian/Ubuntu/Centos. Il vise à simplifier le processus de mise en place d'un serveur de développement web local ou d'un serveur de production basique, en assurant une installation robuste avec des vérifications et des retours clairs.
+Ce script Bash est conçu pour automatiser l'installation et la configuration d'un environnement **LAMP** (Linux, Apache, MySQL, PHP) sur les systèmes d'exploitation basés sur Debian/Ubuntu/Almalinux. Il vise à simplifier le processus de mise en place d'un serveur de développement web local ou d'un serveur de production basique, en assurant une installation robuste avec des vérifications et des retours clairs.
 
 ---
 
@@ -30,8 +30,8 @@ Ce script Bash est conçu pour automatiser l'installation et la configuration d'
 Vous devez avoir des connaissances de base en Linux, en gestion de serveurs et en administration système. Vous devez être capable de naviguer dans un terminal et de comprendre les commandes de base du langage bash.
 
 ### **Système d'exploitation**
-Le script est conçu pour fonctionner sur les distributions Debian/Ubuntu/Centos. Il n'est pas destiné à d'autres systèmes d'exploitation que des systèmes Linux basés sur Debian/Ubuntu/Centos.
-De ce fait, assurez vous d'avoir installer votre système d'exploitation Linux (Debian/Ubuntu/Centos) avant de lancer le script.
+Le script est conçu pour fonctionner sur les distributions Debian/Ubuntu/Almalinux. Il n'est pas destiné à d'autres systèmes d'exploitation que des systèmes Linux basés sur Debian/Ubuntu/Almalinux.
+De ce fait, assurez vous d'avoir installer votre système d'exploitation Linux (Debian/Ubuntu/Almalinux) avant de lancer le script.
 
 ### **Droits d'administration**
 Pour installer et configurer les composants du LAMP, le script nécessite des droits d'administration. Assurez-vous d'avoir les droits d'administration (sudo) ou d'exécuter le script en tant qu'utilisateur root.
@@ -92,7 +92,7 @@ Pour installer et configurer les composants du LAMP, le script nécessite des dr
     #ou
     chmod +x apps/almalinux/install.sh
 
-    #Pour ceux qui ont télécharger seulement le script install.sh pour Debian ou Centos ou Ubuntu
+    #Pour ceux qui ont télécharger seulement le script install.sh pour Debian ou Almalinux ou Ubuntu
     chmod +x install.sh
     ```
 
