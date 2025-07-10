@@ -1,4 +1,4 @@
-# 🚀 LAMP_OSUI-1.0
+# 🚀 LAMP_OSUI
 
 ---
 
