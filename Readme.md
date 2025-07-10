@@ -63,12 +63,12 @@ Pour installer et configurer les composants du LAMP, le script nécessite des dr
 
 1.  **Téléchargez le script** :
     ```bash
-    git clone https://github.com/NABEDE/LAMP_OSUI-1.0.git
-    cd LAMP_OSUI-1.0
+    git clone https://github.com/NABEDE/LAMP_OSUI.git
+    cd LAMP_OSUI
     # Ou téléchargez directement le fichier si vous n'avez pas de dépôt git
-    # wget https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/ubuntu/install.sh
-    # wget https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/debian/install.sh
-    # wget https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/almalinux/install.sh
+    # wget https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/apps/ubuntu/install.sh
+    # wget https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/apps/debian/install.sh
+    # wget https://raw.githubusercontent.com/NABEDE/LAMP_OSUI/master/apps/almalinux/install.sh
     ```
 
 2.  **Rendez le script exécutable** :
