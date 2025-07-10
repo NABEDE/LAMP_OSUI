@@ -68,7 +68,7 @@ Pour installer et configurer les composants du LAMP, le script nécessite des dr
     # Ou téléchargez directement le fichier si vous n'avez pas de dépôt git
     # wget https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/ubuntu/install.sh
     # wget https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/debian/install.sh
-    # wget https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/centos/install.sh
+    # wget https://raw.githubusercontent.com/NABEDE/LAMP_OSUI-1.0/master/apps/almalinux/install.sh
     ```
 
 2.  **Rendez le script exécutable** :
@@ -78,7 +78,7 @@ Pour installer et configurer les composants du LAMP, le script nécessite des dr
     #ou
     chmod +x apps/debian/install.sh
     #ou
-    chmod +x apps/centos/install.sh
+    chmod +x apps/almalinux/install.sh
     ```
 
 2.  **Rendez le script exécutable** :
@@ -90,7 +90,7 @@ Pour installer et configurer les composants du LAMP, le script nécessite des dr
     chmod +x apps/debian/install.sh
 
     #ou
-    chmod +x apps/centos/install.sh
+    chmod +x apps/almalinux/install.sh
 
     #Pour ceux qui ont télécharger seulement le script install.sh pour Debian ou Centos ou Ubuntu
     chmod +x install.sh
@@ -105,7 +105,7 @@ Pour installer et configurer les composants du LAMP, le script nécessite des dr
     #ou
     sudo ./debian/install.sh
     #ou
-    sudo ./centos/install.sh
+    sudo ./almalinux/install.sh
     ```
     Le script vous demandera une confirmation avant de commencer l'installation.
 
@@ -123,7 +123,7 @@ Vous pouvez utiliser les options suivantes lors de l'exécution du script :
     #Ou
     sudo ./debian/install.sh --help
     #Ou
-    sudo ./centos/install.sh --help
+    sudo ./almalinux/install.sh --help
     ```
 * `--no-confirm` : Lance l'installation sans demander de confirmation à l'utilisateur.
     ```bash
@@ -133,14 +133,14 @@ Vous pouvez utiliser les options suivantes lors de l'exécution du script :
     #Ou
     sudo ./debian/install.sh --no-confirm
     #Ou
-    sudo ./centos/install.sh --no-confirm
+    sudo ./almalinux/install.sh --no-confirm
     ```
 
 ---
 
 ## 🔧 Configuration
 
-Vous pouvez personnaliser l'installation en modifiant les variables au début du script `lamp_ubuntu.sh` :
+Vous pouvez personnaliser l'installation en modifiant les variables au début du script `install.sh` :
 
 ```bash
 # --- Variables de configuration ---

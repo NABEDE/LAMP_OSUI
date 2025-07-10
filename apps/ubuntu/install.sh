@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ==============================================================================
-# 🧰 Script d'Installation LAMP Perfectionné 
+# 🧰 Script d'Installation LAMP Perfectionné
 # Installe et configure Apache, MySQL et PHP sur Debian/Ubuntu.
 # Auteur: Jérôme N. | DevOps & Ingénieur Système Linux
 # Date: 19 Juin 2025
@@ -42,15 +42,10 @@ for arg in "$@"; do
 done
 
 # --- 🔥 ASCII Art Logo ---
-info_msg "
-  ${YELLOW}**** **** **** ****${NC}
- ${YELLOW}* ${BLUE}L${YELLOW} * ${BLUE}A${YELLOW} * ${BLUE}M${YELLOW} * ${BLUE}P${YELLOW} *${NC}
-${YELLOW}* * * * * * * *${NC}
-${YELLOW}* ${BLUE}** ${YELLOW}** * ${RED}****${NC}
- ${YELLOW}* * * * * * *${NC}
-  ${YELLOW}* * * * * *${NC}
-   ${YELLOW}**** **** **** ****${NC}
-"
+info_msg "\n🚀 Lancement du script LAMP pour Debian/Ubuntu"
+echo -e "${YELLOW}==============================${NC}"
+echo -e "${BLUE}    💡 LAMP INSTALLER v1.0    ${NC}"
+echo -e "${YELLOW}==============================${NC}"
 success_msg "🎉 Bienvenue dans le script d'installation LAMP perfectionné !"
 
 # --- ✅ Pré-requis ---
@@ -63,7 +58,7 @@ command -v apt &> /dev/null || error_exit "Ce script est conçu pour les distrib
 
 # --- ✅ Confirmation utilisateur ---
 if ! $NO_CONFIRM; then
-    read -p "$(echo -e "${BLUE}⚙️ Voulez-vous démarrer l'installation LAMP ? (O/n) ${NC}")" confirm
+    read -p "(echo -e \"${BLUE}⚙️ Voulez-vous démarrer l'installation LAMP ? (O/n) ${NC}\")" confirm
     [[ "$confirm" =~ ^[Nn]$ ]] && info_msg "🚫 Installation annulée." && exit 0
 fi
 
@@ -126,13 +121,29 @@ for svc in apache2 mysql; do
     fi
 done
 
-# --- 📄 Fichier info.php ---
+
+
 info_msg "🧪 Création du fichier info.php pour tester PHP..."
+
 INFO_FILE="$WEB_ROOT/info.php"
-echo "<?php phpinfo(); ?>" | tee "$INFO_FILE" > /dev/null \
-    && success_msg "Fichier info.php créé dans $WEB_ROOT." \
-    && info_msg "🌐 Accédez à http://localhost/info.php pour tester PHP." \
-    || warn_msg "Impossible de créer le fichier info.php. Vérifiez les permissions."
+
+# Vérifie si le dossier $WEB_ROOT existe, sinon le crée
+if [ ! -d "$WEB_ROOT" ]; then
+    info_msg "📂 Le dossier $WEB_ROOT n'existe pas. Création en cours..."
+    mkdir -p "$WEB_ROOT" || error_exit "❌ Impossible de créer le dossier $WEB_ROOT."
+fi
+
+# Tente de créer le fichier info.php
+if echo "<?php phpinfo(); ?>" > "$INFO_FILE"; then
+    chown www-data:www-data "$INFO_FILE" 2>/dev/null || warn_msg "⚠️ Impossible de modifier le propriétaire de info.php (non critique)."
+    chmod 644 "$INFO_FILE" || warn_msg "⚠️ Impossible de modifier les permissions de info.php (non critique)."
+    success_msg "✅ Fichier info.php créé avec succès dans $WEB_ROOT."
+    info_msg "🌐 Accédez à : http://localhost/info.php pour vérifier l'installation de PHP."
+else
+    error_exit "❌ Échec de la création de $INFO_FILE. Vérifiez les permissions."
+fi
+
+
 
 # --- 🧹 Nettoyage final ---
 info_msg "🧹 Nettoyage du système..."
