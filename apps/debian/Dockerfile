@@ -1,22 +1,20 @@
-FROM debian:trixie-backports
+FROM debian:bookworm
 
-# Installer les utilitaires nécessaires et systemd
+LABEL maintainer="NABEDE"
+
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Installation des outils nécessaires pour le script
 RUN apt-get update && \
-    apt-get install -y sudo wget curl vim net-tools rsyslog systemctl iputils-ping && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y sudo wget curl vim net-tools iputils-ping lsb-release gnupg && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Copier le script d'installation LAMP
+# Copie du script d'installation LAMP
 COPY apps/debian/install.sh /install.sh
 RUN chmod +x /install.sh
 
-# Pour permettre le lancement de systemd (nécessaire pour systemctl)
-STOPSIGNAL SIGRTMIN+3
-ENV container docker
-
-# Lancer le script d'installation automatiquement (sans confirmation)
-ENTRYPOINT ["/install.sh", "--no-confirm"]
-
+# Expose le port 80 pour Apache
 EXPOSE 80
+
+# Lance install.sh automatiquement (sans confirmation)
+ENTRYPOINT ["/install.sh", "--no-confirm"]
