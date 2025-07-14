@@ -3,7 +3,6 @@
 # ============================================================================== 
 # 🛠️ Script d'Installation LAMP Perfectionné pour Debian
 # Auteur: Jérôme N. | 👨‍💻 Ingénieur Système Réseau | 🚀 DevOps Linux & Docker
-# Version: 1.2 | 📅 Mise à jour: 10 juillet 2025
 # ==============================================================================
 
 

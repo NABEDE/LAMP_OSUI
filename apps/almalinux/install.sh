@@ -5,7 +5,6 @@ source ../logo.sh
 # ==============================================================================
 # 🚀 Script d'Installation LAMP Perfectionné pour AlmaLinux
 # Auteur : Jérôme N. | 👨‍💻 Ingénieur Système Réseau | 🚀 DevOps Microservices Linux & Docker
-# Version : 1.1 - Date : 10 juillet 2025
 # ==============================================================================
 
 # ------------------ 📁 Variables de configuration ------------------
