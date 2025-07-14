@@ -6,43 +6,162 @@
 # Version: 1.2 | 📅 Mise à jour: 10 juillet 2025
 # ==============================================================================
 
+
+
 # --- 🔢 Variables de configuration ---
 PHP_VERSION="8.1"
-PHP_MODULES=(php php-mysqlnd php-cli php-json php-gd php-curl php-mbstring php-xml php-zip php-intl php-soap)
+# Modules PHP à installer (modifiez selon vos besoins)
+PHP_MODULES=(
+    php
+    php-mysqlnd
+    php-cli
+    php-json
+    php-gd
+    php-curl
+    php-mbstring
+    php-xml
+    php-zip
+    php-intl
+    php-soap
+)
+
 WEB_ROOT="/var/www/html"
-LOG_FILE="lamp_install_$(date +%Y%m%d_%H%M%S).log"
+
+# Dossier de logs dédié
+LOG_DIR="/var/log/lamp"
+mkdir -p "$LOG_DIR"
+LOG_FILE="$LOG_DIR/lamp_install_$(date +%Y%m%d_%H%M%S).log"
+
+# Vérification de la version de PHP
+if [[ -z "$PHP_VERSION" ]]; then
+    echo "La variable PHP_VERSION n'est pas définie !" | tee -a "$LOG_FILE"
+    exit 1
+fi
+
+# Vérification de l'existence du dossier web root
+if [[ ! -d "$WEB_ROOT" ]]; then
+    echo "Le dossier WEB_ROOT ($WEB_ROOT) n'existe pas. Création..." | tee -a "$LOG_FILE"
+    mkdir -p "$WEB_ROOT"
+fi
+
+# ---- Fin de la première partie du code ------
+
+
 
 # --- 🎨 Couleurs ---
-RED='\e[1;31m'; GREEN='\e[1;32m'; YELLOW='\e[1;33m'; BLUE='\e[1;34m'; NC='\e[0m'
+if [ -t 1 ]; then
+    RED='\033[1;31m'
+    GREEN='\033[1;32m'
+    YELLOW='\033[1;33m'
+    BLUE='\033[1;34m'
+    NC='\033[0m'
+else
+    RED=''
+    GREEN=''
+    YELLOW=''
+    BLUE=''
+    NC=''
+fi
+
+
 
 # --- 💬 Fonctions de log ---
-info_msg()    { echo -e "${BLUE}ℹ️ $1${NC}" | tee -a "$LOG_FILE"; }
-success_msg() { echo -e "${GREEN}✅ $1${NC}" | tee -a "$LOG_FILE"; }
-warn_msg()    { echo -e "${YELLOW}⚠️ $1${NC}" | tee -a "$LOG_FILE"; }
-error_exit()  { echo -e "${RED}❌ ERREUR: $1${NC}" | tee -a "$LOG_FILE" >&2; exit 1; }
+
+log_msg() {
+    local color="$1"
+    local icon="$2"
+    local msg="$3"
+    local level="$4"
+    local datetime
+    datetime="$(date +'%Y-%m-%d %H:%M:%S')"
+
+    # Message formaté
+    local formatted="${color}${icon} [${datetime}] ${msg}${NC}"
+
+    # Écriture
+    if [ "$level" = "ERROR" ]; then
+        echo -e "$formatted" | tee -a "$LOG_FILE" >&2
+        exit 1
+    else
+        echo -e "$formatted" | tee -a "$LOG_FILE"
+    fi
+}
+
+info_msg()    { log_msg "$BLUE"   "ℹ️" "$1" "INFO"; }
+success_msg() { log_msg "$GREEN"  "✅" "$1" "SUCCESS"; }
+warn_msg()    { log_msg "$YELLOW" "⚠️" "$1" "WARN"; }
+error_exit()  { log_msg "$RED"    "❌ ERREUR:" "$1" "ERROR"; }
+
+# ---- Fin de la partie ---------
+
+
+
+
 
 # --- 🕵️ Fonction d'aide ---
 show_help() {
-    echo -e "${BLUE}📃 Utilisation: sudo ./apps/debian/install.sh [--no-confirm | --help]${NC}"
+    echo -e "${BLUE}📃 Utilisation : sudo ./apps/debian/install.sh [OPTIONS]${NC}"
+    echo -e "${GREEN}Options disponibles :${NC}"
     echo -e "  ${GREEN}--help${NC}        Affiche ce message d'aide."
     echo -e "  ${GREEN}--no-confirm${NC}  Ne demande pas de confirmation utilisateur."
-    echo -e "${YELLOW}⚠️ Assurez-vous d’avoir une connexion Internet active.${NC}"
+    echo -e "${GREEN}Exemple :${NC}"
+    echo -e "  sudo ./apps/debian/install.sh --no-confirm"
+    echo -e "${YELLOW}⚠️ Assurez-vous d’avoir :${NC}"
+    echo -e "    - Une connexion Internet active"
+    echo -e "    - Les droits administrateur (sudo)"
+    echo -e "    - Un système Debian compatible"
     exit 0
 }
+# ------- Fin de la partie ----------------
+
+
+
 
 # --- 🔍 Détection version Debian ---
-DEBIAN_VERSION=$(grep VERSION_ID /etc/os-release | cut -d '"' -f 2)
-info_msg "🖥️  Version de Debian détectée : $DEBIAN_VERSION"
+if [ -f /etc/os-release ]; then
+    DEBIAN_VERSION=$(grep VERSION_ID /etc/os-release | cut -d '"' -f 2)
+    DEBIAN_NAME=$(grep PRETTY_NAME /etc/os-release | cut -d '=' -f 2 | tr -d '"')
+    if [ -z "$DEBIAN_VERSION" ]; then
+        warn_msg "Impossible de détecter la version de Debian."
+    else
+        info_msg "🖥️  Version de Debian détectée : $DEBIAN_VERSION ($DEBIAN_NAME)"
+    fi
+else
+    error_exit "Fichier /etc/os-release introuvable. Impossible de détecter la version de Debian."
+fi
 
 # --- 🧠 Traitement des arguments ---
 NO_CONFIRM=false
+UNKNOWN_ARGS=()
+
 for arg in "$@"; do
     case "$arg" in
-        --help) show_help ;;
-        --no-confirm) NO_CONFIRM=true ;;
-        *) warn_msg "Option inconnue: $arg"; show_help ;;
+        --help)
+            show_help
+            ;;
+        --no-confirm)
+            NO_CONFIRM=true
+            ;;
+        *)
+            UNKNOWN_ARGS+=("$arg")
+            ;;
     esac
 done
+
+if [ ${#UNKNOWN_ARGS[@]} -ne 0 ]; then
+    for unknown in "${UNKNOWN_ARGS[@]}"; do
+        warn_msg "Option inconnue : $unknown"
+    done
+    show_help
+fi
+
+
+# ------ Fin de la partie ---------
+
+
+
+
+
 
 # --- 🌟 Logo & intro ---
 info_msg "\n🚀 Démarrage du script d'installation LAMP pour Debian"
