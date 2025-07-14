@@ -3,7 +3,8 @@ FROM ubuntu:noble
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
-    apt-get install -y gnupg curl vim net-tools iputils-ping sudo
+    apt-get install -y gnupg curl vim net-tools iputils-ping sudo \
+    apt-get install -y systemd systemd-sysv
 
 # Copie le script principal et le logo dans des emplacements accessibles
 COPY apps/ubuntu/install.sh /install.sh
