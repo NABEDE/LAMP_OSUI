@@ -9,52 +9,131 @@
 
 # --- 🎯 Variables de configuration ---
 PHP_VERSION="8.1"
-PHP_MODULES=(php libapache2-mod-php php-mysql php-cli php-json php-gd php-curl php-mbstring php-xml php-zip php-intl php-soap)
+PHP_MODULES=(php${PHP_VERSION} libapache2-mod-php${PHP_VERSION} php${PHP_VERSION}-mysql php${PHP_VERSION}-cli php${PHP_VERSION}-json php${PHP_VERSION}-gd php${PHP_VERSION}-curl php${PHP_VERSION}-mbstring php${PHP_VERSION}-xml php${PHP_VERSION}-zip php${PHP_VERSION}-intl php${PHP_VERSION}-soap)
 WEB_ROOT="/var/www/html"
-LOG_FILE="lamp_install_$(date +%Y%m%d_%H%M%S).log"
+LOG_FILE="/var/log/lamp_install_$(date -u +%Y%m%d_%H%M%S).log"
+
+../logo.sh
+
+# Vérification du répertoire web root
+if [ ! -d "$WEB_ROOT" ]; then
+  mkdir -p "$WEB_ROOT"
+fi
 
 # --- 🎨 Couleurs ANSI ---
-RED='\e[1;31m'; GREEN='\e[1;32m'; YELLOW='\e[1;33m'; BLUE='\e[1;34m'; NC='\e[0m'
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[1;34m'
+NC='\033[0m'
+
+USE_COLOR=true  # Mettre à false pour désactiver les couleurs
 
 # --- 📢 Fonctions d'affichage ---
-info_msg()    { echo -e "${BLUE}ℹ️ $1${NC}" | tee -a "$LOG_FILE"; }
-success_msg() { echo -e "${GREEN}✅ $1${NC}" | tee -a "$LOG_FILE"; }
-warn_msg()    { echo -e "${YELLOW}⚠️ $1${NC}" | tee -a "$LOG_FILE"; }
-error_exit()  { echo -e "${RED}❌ ERREUR: $1${NC}" | tee -a "$LOG_FILE" >&2; exit 1; }
+log_msg() {
+    # N'enregistre pas les codes couleurs dans le log
+    local emoji="$1"
+    local msg="$2"
+    echo -e "[$(date '+%Y-%m-%d %H:%M:%S')] $emoji $msg" >> "$LOG_FILE"
+}
 
-# --- 🔧 Aide ---
+display_msg() {
+    local color="$1"
+    local emoji="$2"
+    local msg="$3"
+    if [ "$USE_COLOR" = true ]; then
+        echo -e "${color}${emoji} $msg${NC}"
+    else
+        echo -e "${emoji} $msg"
+    fi
+    log_msg "$emoji" "$msg"
+}
+
+info_msg()    { display_msg "$BLUE"   "ℹ️"  "$1"; }
+success_msg() { display_msg "$GREEN"  "✅"  "$1"; }
+warn_msg()    { display_msg "$YELLOW" "⚠️"  "$1"; }
+error_exit()  { display_msg "$RED"    "❌ ERREUR:" "$1" >&2; exit 1; }
+
+
+
+# --- 🔧 Fonction d'Aide Optimisée ---
 show_help() {
-    echo -e "${BLUE}📘 Utilisation : sudo ./lamp_ubuntu.sh [--no-confirm | --help]${NC}"
+    # Affichage dans le terminal avec couleurs et emojis
+    info_msg "📘 Utilisation : sudo ./ubuntu/install.sh [--no-confirm | --help]"
     echo -e "  ${GREEN}--help${NC}        Affiche ce message d'aide."
     echo -e "  ${GREEN}--no-confirm${NC}  Ne demande pas de confirmation utilisateur."
-    echo -e "${YELLOW}⚠️ Assurez-vous d’avoir une connexion Internet active.${NC}"
+    warn_msg "⚠️ Assurez-vous d’avoir une connexion Internet active."
+
+    # Ajout dans le log (sans couleur)
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [HELP] Affichage de l'aide à l'utilisateur." >> "$LOG_FILE"
     exit 0
 }
 
+
+
 # --- 🧠 Traitement des arguments ---
 NO_CONFIRM=false
-for arg in "$@"; do
-    case "$arg" in
-        --help) show_help ;;
-        --no-confirm) NO_CONFIRM=true ;;
-        *) warn_msg "Option inconnue: $arg"; show_help ;;
+UNKNOWN_ARGS=()
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --help)
+            show_help
+            ;;
+        --no-confirm)
+            NO_CONFIRM=true
+            ;;
+        *)
+            UNKNOWN_ARGS+=("$1")
+            ;;
     esac
+    shift
 done
 
-# --- 🔥 ASCII Art Logo ---
-info_msg "\n🚀 Lancement du script LAMP pour Debian/Ubuntu"
-echo -e "${YELLOW}==============================${NC}"
-echo -e "${BLUE}    💡 LAMP INSTALLER v1.0    ${NC}"
-echo -e "${YELLOW}==============================${NC}"
-success_msg "🎉 Bienvenue dans le script d'installation LAMP perfectionné !"
+if [[ ${#UNKNOWN_ARGS[@]} -gt 0 ]]; then
+    for arg in "${UNKNOWN_ARGS[@]}"; do
+        warn_msg "Option inconnue : $arg"
+    done
+    show_help
+fi
+# ---- Fin de la partie --------
 
-# --- ✅ Pré-requis ---
-[[ $EUID -ne 0 ]] && error_exit "Ce script doit être exécuté en tant que root (utilisez sudo)."
 
-info_msg "🌐 Vérification de la connexion Internet..."
-ping -c 1 google.com &> /dev/null || error_exit "Pas de connexion Internet."
+# --- 🔥 Fonction d'affichage du Logo ASCII Art ---
+SCRIPT_NAME="LAMP INSTALLER"
 
-command -v apt &> /dev/null || error_exit "Ce script est conçu pour les distributions APT (Debian/Ubuntu)."
+show_logo() {
+    info_msg "\n🚀 Lancement du script $SCRIPT_NAME pour Debian/Ubuntu"
+    info_msg "${YELLOW}==============================${NC}"
+    info_msg "${BLUE}    💡 $SCRIPT_NAME    ${NC}"
+    info_msg "${YELLOW}==============================${NC}"
+    success_msg "🎉 Bienvenue dans le script d'installation LAMP perfectionné !"
+    echo ""
+}
+
+# Appel de la fonction (à placer au début du script)
+show_logo
+
+
+
+# --- ✅ Vérification des pré-requis ---
+
+check_prerequisites() {
+    [[ $EUID -ne 0 ]] && error_exit "Ce script doit être exécuté en tant que root (utilisez sudo)."
+
+    info_msg "🌐 Vérification de la connexion Internet..."
+    # Test réseau via HTTP (plus fiable que ping)
+    if ! curl -s --head --connect-timeout 5 https://www.google.com | grep "200 OK" &> /dev/null; then
+        error_exit "Pas de connexion Internet ou accès HTTP bloqué."
+    fi
+
+    command -v apt &> /dev/null || error_exit "Ce script est conçu pour les distributions APT (Debian/Ubuntu)."
+}
+
+# Appel de la fonction
+check_prerequisites
+
+
 
 # --- ✅ Confirmation utilisateur ---
 if ! $NO_CONFIRM; then
